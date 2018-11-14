@@ -7,7 +7,8 @@ node_modules
 /.env.local
 /.env.*.local
 /public/bundles/
-/public/assets/
+/public/assets/*
+!/public/assets/.gitkeep
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
