@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 ;
 
 var paths = {
-    source: 'assets/frontend/',
+    source: 'assets/',
     vendor: 'node_modules/',
     dest: 'public/assets/'
 };
@@ -33,6 +33,7 @@ var css = {
         paths.vendor + 'bootstrap/dist/css/bootstrap.min.css',
         paths.vendor + '@fortawesome/fontawesome-free/css/all.min.css',
         paths.vendor + 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+        paths.source + 'css/main.css',
     ],
     out: paths.dest + 'css/',
 };

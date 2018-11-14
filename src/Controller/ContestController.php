@@ -52,7 +52,7 @@ class ContestController extends AbstractController
      */
     public function success()
     {
-        return $this->render('contest/index.html.twig', [
+        return $this->render('contest/success.html.twig', [
             'controller_name' => 'ContestController',
         ]);
     }

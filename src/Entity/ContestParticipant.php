@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *            columns={"email", "contest_id"})
  *    })
  *
- * @UniqueEntity(fields={"email", "contest"})
+ * @UniqueEntity(fields={"email", "contest"}, message="Sie können nur einmal pro Gewinnspiel teilnehmen!")
  */
 class ContestParticipant
 {
@@ -34,8 +34,8 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
+     * @Assert\Email(message="Bitte geben Sie eine korrekte Emailadresse an.")
      */
     private $email;
 
@@ -43,7 +43,7 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $firstname;
 
@@ -51,7 +51,7 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $lastname;
 
@@ -59,7 +59,7 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $address;
 
@@ -67,7 +67,14 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=5)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
+     * @Assert\Length(
+     *     min=5,
+     *     max=5,
+     *     minMessage = "Bitte geben Sie mindestens {{ limit }} Zeichen an.",
+     *     minMessage = "Bitte geben Sie maximal {{ limit }} Zeichen an.",
+     *     exactMessage = "Bitte geben Sie eine korrekte Postleitzahl mit {{ limit }} Zeichen an."
+     * )
      */
     private $zipcode;
 
@@ -75,7 +82,7 @@ class ContestParticipant
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $city;
 

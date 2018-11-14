@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ contest.title }}{% endblock %}
+{% set class = 'form-control' %}
 
 {% block body %}
     <div class="row">
@@ -9,16 +10,18 @@
             {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
             <div class="row">
                 <div class="col-6">
+                    {% set _class = not form.firstname.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Vorname'}}) }}
+                        {{ form_widget(form.firstname, {'attr': {'class': _class, 'placeholder': 'Vorname'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.firstname) }}
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
+                    {% set _class = not form.lastname.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Nachname'}}) }}
+                        {{ form_widget(form.lastname, {'attr': {'class': _class, 'placeholder': 'Nachname'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.lastname) }}
                         </div>
@@ -27,16 +30,18 @@
             </div>
             <div class="row">
                 <div class="col-6">
+                    {% set _class = not form.email.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                        {{ form_widget(form.email, {'attr': {'class': _class, 'placeholder': 'Email'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.email) }}
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
+                    {% set _class = not form.address.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Adresse'}}) }}
+                        {{ form_widget(form.address, {'attr': {'class': _class, 'placeholder': 'Adresse'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.address) }}
                         </div>
@@ -45,16 +50,18 @@
             </div>
             <div class="row">
                 <div class="col-6">
+                    {% set _class = not form.zipcode.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.zipcode, {'attr': {'class': 'form-control', 'placeholder': 'Postleitzahl'}}) }}
+                        {{ form_widget(form.zipcode, {'attr': {'class': _class, 'placeholder': 'Postleitzahl'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.zipcode) }}
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
+                    {% set _class = not form.city.vars.valid ? class ~ ' is-invalid' : class %}
                     <div class="form-group">
-                        {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': 'Stadt'}}) }}
+                        {{ form_widget(form.city, {'attr': {'class': _class, 'placeholder': 'Stadt'}}) }}
                         <div class="form-error">
                             {{ form_errors(form.city) }}
                         </div>
