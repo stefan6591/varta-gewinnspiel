@@ -8,6 +8,7 @@ use App\Form\Type\ContestParticipantType;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContestController extends AbstractController
@@ -28,6 +29,11 @@ class ContestController extends AbstractController
     public function contest(Request $request)
     {
         $contest = $this->getDoctrine()->getRepository('App:Contest')->findCurrentContest();
+
+        if($contest === null){
+            throw new NotFoundHttpException('Contest not found');
+        }
+
         $contestParticipant = new ContestParticipant();
         $contestParticipant->setContest($contest);
         $form = $this->createForm(ContestParticipantType::class, $contestParticipant);
