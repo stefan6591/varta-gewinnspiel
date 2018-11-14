@@ -8,7 +8,8 @@ php bin/console doctrine:migrations:migrate
 
 npm install
 gulp
-#rm web/app_dev.php
+rm bootstrap.sh
+rm Vagrantfile
 
 php bin/console assets:install web
 php bin/console cache:clear --env prod
