@@ -23,6 +23,7 @@ class ContestRepository extends ServiceEntityRepository
     public function findCurrentContest(){
 
         $now = new \DateTime();
+        $now->setTimezone(new \DateTimeZone('Europe/Berlin'));
         $qb = $this->createQueryBuilder('c');
 
         $qb->where('c.date = :date')
