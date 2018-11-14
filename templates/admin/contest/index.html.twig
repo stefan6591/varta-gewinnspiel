@@ -14,6 +14,7 @@
                 <tr>
                     <th scope="col">Titel</th>
                     <th scope="col">Datum</th>
+                    <th scope="col">Teilnehmer</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{ contest.title }}</td>
                         <td>{{ contest.date|date('d.m.Y') }}</td>
+                        <td>{{ contest.participants|length }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

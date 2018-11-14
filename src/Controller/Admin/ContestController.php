@@ -33,9 +33,9 @@ class ContestController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $date = $form->get('date')->getData();
-            $startDatetime = \DateTime::createFromFormat('d.m.Y H:i:s', $date . ' 00:00:00');
-            $contest->setDate($startDatetime->format('Y-m-d'));
+//            $date = $form->get('date')->getData();
+//            $startDatetime = \DateTime::createFromFormat('d.m.Y H:i:s', $date . ' 00:00:00');
+//            $contest->setDate($date);
 
             $this->getDoctrine()->getManager()->persist($contest);
             $this->getDoctrine()->getManager()->flush();

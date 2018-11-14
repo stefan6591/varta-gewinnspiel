@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContestRepository")
- * @UniqueEntity("date")
+ * @UniqueEntity(fields={"date"})
  */
 class Contest
 {
@@ -102,7 +104,7 @@ class Contest
     /**
      * @return string
      */
-    public function getDate(): string
+    public function getDate(): ?string
     {
         return $this->date;
     }
@@ -110,23 +112,23 @@ class Contest
     /**
      * @param string $date
      */
-    public function setDate(string $date): void
+    public function setDate(?string $date): void
     {
         $this->date = $date;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getParticipants(): ArrayCollection
+    public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
     /**
-     * @param ArrayCollection $participants
+     * @param Collection $participants
      */
-    public function setParticipants(ArrayCollection $participants): void
+    public function setParticipants(Collection $participants): void
     {
         $this->participants = $participants;
     }
