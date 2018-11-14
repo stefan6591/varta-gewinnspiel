@@ -2,7 +2,7 @@
 #git stash
 #git pull
 
-composer install
+#composer install
 
 php bin/console doctrine:migrations:migrate
 
