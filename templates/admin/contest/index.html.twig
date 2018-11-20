@@ -13,6 +13,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Titel</th>
+                    <th scope="col">Typ</th>
                     <th scope="col">Datum</th>
                     <th scope="col">Teilnehmer</th>
                 </tr>
@@ -21,6 +22,7 @@
                 {% for contest in contests %}
                     <tr>
                         <td>{{ contest.title }}</td>
+                        <td>{{ types[contest.type] }}</td>
                         <td>{{ contest.date|date('d.m.Y') }}</td>
                         <td>{{ contest.participants|length }}</td>
                     </tr>

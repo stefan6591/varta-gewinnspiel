@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contest;
-use App\Form\Admin\Type\ContestType;
 use phpDocumentor\Reflection\Types\This;
+use App\Form\Admin\Type\ContestType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +18,7 @@ class ContestController extends AbstractController
     {
         return $this->render('admin/contest/index.html.twig', [
             'contests' => $this->getDoctrine()->getRepository('App:Contest')->findBy([], ['date' => 'asc']),
+            'types' => array_flip(Contest::$types)
         ]);
     }
 
@@ -27,15 +28,16 @@ class ContestController extends AbstractController
     public function create(Request $request)
     {
         $contest = new Contest();
+
         $form = $this->createForm(ContestType::class, $contest);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-//            $date = $form->get('date')->getData();
-//            $startDatetime = \DateTime::createFromFormat('d.m.Y H:i:s', $date . ' 00:00:00');
-//            $contest->setDate($date);
+            if($contest->getType() === Contest::TYPE_ADVENT_CALENDAR){
+                $contest->setQuestion(null);
+            }
 
             $this->getDoctrine()->getManager()->persist($contest);
             $this->getDoctrine()->getManager()->flush();

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Form\Admin\Type;
+namespace App\Form\Type;
 
 use App\Entity\Contest;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,14 +16,15 @@ class ContestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('participant', ContestParticipantType::class);
+
+        if($options['type'] === Contest::TYPE_DEFAULT){
+
+        }
+
         $builder
-            ->add('title', TextType::class)
-            ->add('date', TextType::class)
-            ->add('type', ChoiceType::class, [
-                'choices' => Contest::$types
-            ])
-            ->add('question', QuestionType::class, [
-                'label' => false
+            ->add('newsletter', CheckboxType::class, [
+                'mapped' => false
             ])
             ->add('save', SubmitType::class)
         ;
@@ -32,12 +33,15 @@ class ContestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Contest::class,
+            'data_class' => null,
         ));
+
+        $resolver->setRequired('type');
+        $resolver->setAllowedTypes('type', array('int'));
     }
 
     public function getBlockPrefix()
     {
-        return 'contest_admin_type';
+        return 'contest_type';
     }
 }

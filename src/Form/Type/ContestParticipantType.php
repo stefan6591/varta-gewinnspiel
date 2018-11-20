@@ -21,7 +21,6 @@ class ContestParticipantType extends AbstractType
             ->add('address', TextType::class)
             ->add('zipcode', TextType::class)
             ->add('city', TextType::class)
-            ->add('save', SubmitType::class)
         ;
     }
 
