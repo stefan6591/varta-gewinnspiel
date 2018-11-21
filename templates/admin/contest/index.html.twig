@@ -16,6 +16,7 @@
                     <th scope="col">Typ</th>
                     <th scope="col">Datum</th>
                     <th scope="col">Teilnehmer</th>
+                    <th scope="col">Aktion</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,11 @@
                         <td>{{ types[contest.type] }}</td>
                         <td>{{ contest.date|date('d.m.Y') }}</td>
                         <td>{{ contest.participants|length }}</td>
+                        <td>
+                            {{ form_start(deleteForms[contest.id]) }}
+                                {{ form_widget(deleteForms[contest.id]) }}
+                            {{ form_end(deleteForms[contest.id]) }}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

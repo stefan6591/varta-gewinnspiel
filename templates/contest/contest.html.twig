@@ -8,7 +8,20 @@
         <div class="col-12">
             <h1>{{ contest.title }}</h1>
             {% if contest is not null %}
-                {% include 'contest/partials/contest-participant-form.html.twig' %}
+
+                {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                    {% include 'contest/partials/contest-participant-form.html.twig' %}
+
+                    {% if contest.type == constant('App\\Entity\\Contest::TYPE_RADIO') %}
+                        {{ form_widget(form.answer.radio, {'attr': {'class': ''}}) }}
+                        <div class="form-error">
+                            {{ form_errors(form.answer.radio) }}
+                        </div>
+                    {% endif %}
+
+                    {{ form_row(form.newsletter, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+                {{ form_end(form) }}
             {% endif %}
         </div>
     </div>

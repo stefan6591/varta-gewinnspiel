@@ -31,62 +31,43 @@
         </div>
     </div>
     {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+    {{ form_rest(form) }}
     {{ form_end(form) }}
 
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script>
+
+        var $collectionHolder;
+        var $addButton = $('<button type="button" class="btn btn-sm btn-primary add_answer">Antwort hinzufügen</button>');
+        var $newLinkLi = $('<li></li>').append($addButton);
+
         $(document).ready(function () {
 
             $('#contest_admin_type_date').datepicker({
                 format: 'yyyy-mm-dd'
             });
 
-            var $collectionHolder;
-            // setup an "add a tag" link
-            var $addButton = $('<button type="button" class="btn btn-primary add_answer">Antwort hinzufügen</button>');
-            var $newLinkLi = $('<li></li>').append($addButton);
-
-            jQuery(document).ready(function() {
-                // Get the ul that holds the collection of tags
-                $collectionHolder = $('ul.answers');
-
-                // add the "add a tag" anchor and li to the tags ul
-                $collectionHolder.append($newLinkLi);
-
-                // count the current form inputs we have (e.g. 2), use that as the new
-                // index when inserting a new item (e.g. 2)
-                $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-                $addButton.on('click', function(e) {
-                    // add a new tag form (see next code block)
-                    addForm($collectionHolder, $newLinkLi);
-                });
+            $collectionHolder = $('ul.answers');
+            $collectionHolder.append($newLinkLi);
+            console.log($collectionHolder.find(':input').length);
+            $collectionHolder.data('index', $collectionHolder.find('input.form-control').length);
+            $addButton.on('click', function(e) {
+                addForm($collectionHolder, $newLinkLi);
             });
+            // addForm($collectionHolder, $newLinkLi);
         });
 
         function addForm($collectionHolder, $newLinkLi) {
-            // Get the data-prototype explained earlier
-            var prototype = $collectionHolder.data('prototype');
 
-            // get the new index
+            var prototype = $collectionHolder.data('prototype');
             var index = $collectionHolder.data('index');
 
             var newForm = prototype;
-            // You need this only if you didn't set 'label' => false in your tags field in TaskType
-            // Replace '__name__label__' in the prototype's HTML to
-            // instead be a number based on how many items we have
-            // newForm = newForm.replace(/__name__label__/g, index);
-
-            // Replace '__name__' in the prototype's HTML to
-            // instead be a number based on how many items we have
             newForm = newForm.replace(/__name__/g, index);
-
-            // increase the index with one for the next item
+            newForm = newForm.replace(/__name2__/g, index + 1);
             $collectionHolder.data('index', index + 1);
-
-            // Display the form in the page in an li, before the "Add a tag" link li
             var $newFormLi = $('<li></li>').append(newForm);
             $newLinkLi.before($newFormLi);
         }

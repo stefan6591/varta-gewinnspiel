@@ -3,8 +3,12 @@
 namespace App\Form\Type;
 
 use App\Entity\Contest;
+use App\Entity\QuestionAnswer;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,8 +22,10 @@ class ContestType extends AbstractType
     {
         $builder->add('participant', ContestParticipantType::class);
 
-        if($options['type'] === Contest::TYPE_DEFAULT){
-
+        if($options['type'] === Contest::TYPE_RADIO && $options['questionId'] !== null){
+            $builder->add('answer', AnswerRadioButtonType::class, [
+                'questionId' => $options['questionId']
+            ]);
         }
 
         $builder
@@ -38,6 +44,9 @@ class ContestType extends AbstractType
 
         $resolver->setRequired('type');
         $resolver->setAllowedTypes('type', array('int'));
+
+        $resolver->setRequired('questionId');
+        $resolver->setAllowedTypes('questionId', array('null', 'string'));
     }
 
     public function getBlockPrefix()

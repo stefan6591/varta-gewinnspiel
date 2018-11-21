@@ -28,6 +28,7 @@ class QuestionAnswer
      * @var string
      *
      * @ORM\Column(type="string", length=2048)
+     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"regular"})
      */
     private $title;
 
@@ -62,5 +63,21 @@ class QuestionAnswer
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return Question
+     */
+    public function getQuestion(): Question
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param Question $question
+     */
+    public function setQuestion(Question $question): void
+    {
+        $this->question = $question;
     }
 }

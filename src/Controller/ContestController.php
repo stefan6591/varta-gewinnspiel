@@ -41,12 +41,17 @@ class ContestController extends AbstractController
         $form = $this->createForm(ContestType::class, [
             'participant' => $contestParticipant
         ], [
-            'type' => $contest->getType()
+            'type' => $contest->getType(),
+            'questionId' => $contest->getQuestion() !== null ? $contest->getQuestion()->getId() : null
         ]);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            if($contest->getType() === Contest::TYPE_RADIO){
+                $contestParticipant->setProvidedAnswer($form->get('answer')->get('radio')->getData()->getTitle());
+            }
 
             $this->getDoctrine()->getManager()->persist($contestParticipant);
             $this->getDoctrine()->getManager()->flush();

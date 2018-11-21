@@ -29,6 +29,7 @@ class Question
      * @var string
      *
      * @ORM\Column(type="string", length=2048)
+     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"regular"})
      */
     private $title;
 
@@ -40,9 +41,15 @@ class Question
     private $type = self::TYPE_RADIO;
 
     /**
+     * @ORM\OneToOne(targetEntity="Contest", mappedBy="question")
+     */
+    private $contest;
+
+    /**
      * @var ArrayCollection()
      *
      * @ORM\OneToMany(targetEntity="QuestionAnswer", mappedBy="question", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $answers;
 
@@ -120,7 +127,7 @@ class Question
     /**
      * @return Contest
      */
-    public function getContest(): Contest
+    public function getContest(): ?Contest
     {
         return $this->contest;
     }
@@ -128,7 +135,7 @@ class Question
     /**
      * @param Contest $contest
      */
-    public function setContest(Contest $contest): void
+    public function setContest(?Contest $contest): void
     {
         $this->contest = $contest;
     }

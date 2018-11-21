@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContestType extends AbstractType
@@ -20,7 +21,9 @@ class ContestType extends AbstractType
             ->add('title', TextType::class)
             ->add('date', TextType::class)
             ->add('type', ChoiceType::class, [
-                'choices' => Contest::$types
+                'choices' => Contest::$types,
+                'multiple' => false,
+                'expanded' => false,
             ])
             ->add('question', QuestionType::class, [
                 'label' => false
@@ -33,6 +36,14 @@ class ContestType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Contest::class,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+
+                if (Contest::TYPE_RADIO == $data->getType()) {
+                    return array('Default', 'regular');
+                }
+                return ['Default'];
+            },
         ));
     }
 

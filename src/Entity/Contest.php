@@ -17,11 +17,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Contest
 {
     const TYPE_DEFAULT = 1;
-    const TYPE_ADVENT_CALENDAR = 2;
+    const TYPE_RADIO = 2;
 
     public static $types = [
         'Default' => self::TYPE_DEFAULT,
-        'Advents Kalender' => self::TYPE_ADVENT_CALENDAR,
+        'Radio' => self::TYPE_RADIO,
     ];
 
     /**
@@ -59,15 +59,16 @@ class Contest
     /**
      * @var Question|null
      *
-     * @ORM\OneToOne(targetEntity="Question", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Question", inversedBy="contest", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=true)
+     * @Assert\Valid()
      */
     private $question;
 
     /**
      * @var ArrayCollection()
      *
-     * @ORM\OneToMany(targetEntity="ContestParticipant", mappedBy="contest")
+     * @ORM\OneToMany(targetEntity="ContestParticipant", mappedBy="contest", cascade={"persist", "remove"})
      */
     private $participants;
 

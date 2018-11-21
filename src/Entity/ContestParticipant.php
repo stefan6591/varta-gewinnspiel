@@ -79,6 +79,13 @@ class ContestParticipant
     private $zipcode;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    private $providedAnswer;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=180)
@@ -181,6 +188,22 @@ class ContestParticipant
     public function setZipcode(?string $zipcode): void
     {
         $this->zipcode = $zipcode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProvidedAnswer(): ?string
+    {
+        return $this->providedAnswer;
+    }
+
+    /**
+     * @param string $providedAnswer
+     */
+    public function setProvidedAnswer(?string $providedAnswer): void
+    {
+        $this->providedAnswer = $providedAnswer;
     }
 
     /**
