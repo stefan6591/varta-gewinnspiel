@@ -1,0 +1,12 @@
+
+<div class="row">
+    <div class="col-6">
+        {% set _class = not form.participant.firstname.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.firstname, {'attr': {'class': _class, 'placeholder': 'Vorname'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.firstname) }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+
+<div class="row">
+    <div class="col-6">
+        {% set _class = not form.participant.firstname.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.firstname, {'attr': {'class': _class, 'placeholder': 'Vorname'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.firstname) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        {% set _class = not form.participant.lastname.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.lastname, {'attr': {'class': _class, 'placeholder': 'Nachname'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.lastname) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        {% set _class = not form.participant.email.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.email, {'attr': {'class': _class, 'placeholder': 'Email'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.email) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        {% set _class = not form.participant.address.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.address, {'attr': {'class': _class, 'placeholder': 'Adresse'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.address) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        {% set _class = not form.participant.zipcode.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.zipcode, {'attr': {'class': _class, 'placeholder': 'Postleitzahl'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.zipcode) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        {% set _class = not form.participant.city.vars.valid ? class ~ ' is-invalid' : class %}
+        <div class="form-group">
+            {{ form_widget(form.participant.city, {'attr': {'class': _class, 'placeholder': 'Stadt'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.participant.city) }}
+            </div>
+        </div>
+    </div>
+</div>

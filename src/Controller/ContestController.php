@@ -6,6 +6,7 @@ use App\Entity\Contest;
 use App\Entity\ContestParticipant;
 use App\Form\Type\ContestParticipantType;
 use phpDocumentor\Reflection\Types\This;
+use App\Form\Type\ContestType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,6 +29,7 @@ class ContestController extends AbstractController
      */
     public function contest(Request $request)
     {
+        /** @var Contest $contest */
         $contest = $this->getDoctrine()->getRepository('App:Contest')->findCurrentContest();
 
         if($contest === null){
@@ -36,11 +38,20 @@ class ContestController extends AbstractController
 
         $contestParticipant = new ContestParticipant();
         $contestParticipant->setContest($contest);
-        $form = $this->createForm(ContestParticipantType::class, $contestParticipant);
+        $form = $this->createForm(ContestType::class, [
+            'participant' => $contestParticipant
+        ], [
+            'type' => $contest->getType(),
+            'questionId' => $contest->getQuestion() !== null ? $contest->getQuestion()->getId() : null
+        ]);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            if($contest->getType() === Contest::TYPE_RADIO){
+                $contestParticipant->setProvidedAnswer($form->get('answer')->get('radio')->getData()->getTitle());
+            }
 
             $this->getDoctrine()->getManager()->persist($contestParticipant);
             $this->getDoctrine()->getManager()->flush();

@@ -1,0 +1,27 @@
+<ul class="answers"
+    data-prototype="{% filter escape %}{{ include('admin/contest/partials/question-answers-prototype.html.twig') }}{% endfilter %}">
+
+{% for key, answer in form.answers %}
+    <li>
+        <div class="form-group">
+            <div id="contest_admin_type_question_answers_{{ loop.index }}">
+                <div>
+                    {{ form_widget(answer.title, {'attr': {
+                        'id': 'contest_admin_type_question_answers_' ~ loop.index ~ '_title',
+                        'name': 'contest_admin_type[question][answers][' ~ loop.index ~ '][title]',
+                        'required': 'required',
+                        'class': 'form-control',
+                        'placeholder': 'Antwortmöglichkeit ' ~ loop.index
+                    }}) }}
+                    <div class="form-error">
+                        {#{{ loop.index }} - {{ answer.title.vars.id }}#}
+                        {{ form_errors(answer.title) }}
+                        {#{{ form_errors(form.answers[key].title) }}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+{% endfor %}
+
+</ul>

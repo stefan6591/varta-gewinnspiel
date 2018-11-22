@@ -16,6 +16,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Contest
 {
+    const TYPE_DEFAULT = 1;
+    const TYPE_RADIO = 2;
+
+    public static $types = [
+        'Default' => self::TYPE_DEFAULT,
+        'Radio' => self::TYPE_RADIO,
+    ];
+
     /**
      * @var string
      *
@@ -29,6 +37,7 @@ class Contest
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $title;
 
@@ -36,17 +45,41 @@ class Contest
      * @var string
      *
      * @ORM\Column(type="string", length=10, unique=true)
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
     private $date;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="contest_type", type="integer", options={"default" : 1})
+     */
+    private $type = self::TYPE_DEFAULT;
+
+    /**
+     * @var Question|null
+     *
+     * @ORM\OneToOne(targetEntity="Question", inversedBy="contest", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=true)
+     * @Assert\Valid()
+     */
+    private $question;
+
+    /**
      * @var ArrayCollection()
      *
-     * @ORM\OneToMany(targetEntity="ContestParticipant", mappedBy="contest")
+     * @ORM\OneToMany(targetEntity="ContestParticipant", mappedBy="contest", cascade={"persist", "remove"})
      */
     private $participants;
 
     use TimestampableEntity;
+
+    /**
+     * Contest constructor.
+     */
+    public function __construct() {
+        $this->participants = new ArrayCollection();
+    }
 
     /**
      * @param ContestParticipant $participant
@@ -68,13 +101,6 @@ class Contest
         $this->participants->removeElement($participant);
 
         return $this;
-    }
-
-    /**
-     * Contest constructor.
-     */
-    public function __construct() {
-        $this->participants = new ArrayCollection();
     }
 
     /**
@@ -115,6 +141,38 @@ class Contest
     public function setDate(?string $date): void
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return Question|null
+     */
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param Question|null $question
+     */
+    public function setQuestion(?Question $question): void
+    {
+        $this->question = $question;
     }
 
     /**

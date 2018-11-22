@@ -4,13 +4,19 @@
 {% block page_header %}Gewinnspiele erstellen{% endblock %}
 
 {% block page %}
+    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
     <div class="row">
-        <div class="col-12">
-            {{ form_start(form) }}
+        <div class="col-6">
             <div class="form-group">
                 {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titel'}}) }}
                 <div class="form-error">
-                    {{ form_errors(form.date) }}
+                    {{ form_errors(form.title) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Datum'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.type) }}
                 </div>
             </div>
             <div class="form-group">
@@ -19,19 +25,51 @@
                     {{ form_errors(form.date) }}
                 </div>
             </div>
-            {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
-            {{ form_end(form) }}
+        </div>
+        <div class="col-6">
+            {% include 'admin/contest/partials/question-form.html.twig' with { 'form': form.question } %}
         </div>
     </div>
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script>
+
+        var $collectionHolder;
+        var $addButton = $('<button type="button" class="btn btn-sm btn-primary add_answer">Antwort hinzufügen</button>');
+        var $newLinkLi = $('<li></li>').append($addButton);
+
         $(document).ready(function () {
+
             $('#contest_admin_type_date').datepicker({
                 format: 'yyyy-mm-dd'
-            })
-        })
+            });
+
+            $collectionHolder = $('ul.answers');
+            $collectionHolder.append($newLinkLi);
+            console.log($collectionHolder.find(':input').length);
+            $collectionHolder.data('index', $collectionHolder.find('input.form-control').length);
+            $addButton.on('click', function(e) {
+                addForm($collectionHolder, $newLinkLi);
+            });
+            // addForm($collectionHolder, $newLinkLi);
+        });
+
+        function addForm($collectionHolder, $newLinkLi) {
+
+            var prototype = $collectionHolder.data('prototype');
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype;
+            newForm = newForm.replace(/__name__/g, index);
+            newForm = newForm.replace(/__name2__/g, index + 1);
+            $collectionHolder.data('index', index + 1);
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
     </script>
 {% endblock %}
