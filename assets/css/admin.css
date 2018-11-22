@@ -2,3 +2,8 @@ ul.answers {
     list-style-type: none;
     padding: 0;
 }
+
+table a.btn {
+    float: left;
+    margin-right: 5px;
+}

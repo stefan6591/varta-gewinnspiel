@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContestRepository")
- * @UniqueEntity(fields={"date"})
  */
 class Contest
 {
@@ -44,10 +43,18 @@ class Contest
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=10, unique=true)
+     * @ORM\Column(type="string", length=10)
      * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      */
-    private $date;
+    private $startDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
+     */
+    private $endDate;
 
     /**
      * @var int
@@ -130,17 +137,33 @@ class Contest
     /**
      * @return string
      */
-    public function getDate(): ?string
+    public function getStartDate(): ?string
     {
-        return $this->date;
+        return $this->startDate;
     }
 
     /**
-     * @param string $date
+     * @param string $startDate
      */
-    public function setDate(?string $date): void
+    public function setStartDate(?string $startDate): void
     {
-        $this->date = $date;
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDate(): ?string
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param string $endDate
+     */
+    public function setEndDate(?string $endDate): void
+    {
+        $this->endDate = $endDate;
     }
 
     /**

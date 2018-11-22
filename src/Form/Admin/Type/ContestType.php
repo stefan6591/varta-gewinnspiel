@@ -19,7 +19,8 @@ class ContestType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('date', TextType::class)
+            ->add('startDate', TextType::class)
+            ->add('endDate', TextType::class)
             ->add('type', ChoiceType::class, [
                 'choices' => Contest::$types,
                 'multiple' => false,
