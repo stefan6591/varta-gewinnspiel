@@ -21,7 +21,7 @@ class ContestController extends AbstractController
     {
         $deleteForms = array();
 
-        $contests = $this->getDoctrine()->getRepository('App:Contest')->findBy([], ['date' => 'asc']);
+        $contests = $this->getDoctrine()->getRepository('App:Contest')->findBy([], ['startDate' => 'asc']);
 
         foreach ($contests as $contest) {
             $deleteForms[$contest->getId()] = $this->createDeleteForm($contest)->createView();

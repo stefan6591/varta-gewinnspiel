@@ -32,7 +32,9 @@ class ContestType extends AbstractType
             ->add('newsletter', CheckboxType::class, [
                 'mapped' => false
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'label' => 'Teilnehmen'
+            ])
         ;
     }
 

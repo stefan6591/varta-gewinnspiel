@@ -25,43 +25,53 @@ class ContestController extends AbstractController
     }
 
     /**
-     * @Route("/contest", name="contest")
+     * @Route("/contest/{contest}", name="contest")
      */
-    public function contest(Request $request)
+    public function contest(Request $request, Contest $contest)
     {
-        /** @var Contest $contest */
-        $contest = $this->getDoctrine()->getRepository('App:Contest')->findCurrentContest();
-
         if($contest === null){
             throw new NotFoundHttpException('Contest not found');
         }
 
-        $contestParticipant = new ContestParticipant();
-        $contestParticipant->setContest($contest);
-        $form = $this->createForm(ContestType::class, [
-            'participant' => $contestParticipant
-        ], [
-            'type' => $contest->getType(),
-            'questionId' => $contest->getQuestion() !== null ? $contest->getQuestion()->getId() : null
-        ]);
+        $now = new \DateTime();
+        $from = \DateTime::createFromFormat('Y-m-d', $contest->getStartDate());
+        $to = \DateTime::createFromFormat('Y-m-d', $contest->getEndDate());
+        $from->setTime(0,0,0);
+        $to->setTime(23,59,59);
 
-        $form->handleRequest($request);
+        if($now >= $from && $now <= $to){
 
-        if($form->isSubmitted() && $form->isValid()){
+            $contestParticipant = new ContestParticipant();
+            $contestParticipant->setContest($contest);
+            $form = $this->createForm(ContestType::class, [
+                'participant' => $contestParticipant
+            ], [
+                'type' => $contest->getType(),
+                'questionId' => $contest->getQuestion() !== null ? $contest->getQuestion()->getId() : null
+            ]);
 
-            if($contest->getType() === Contest::TYPE_RADIO){
-                $contestParticipant->setProvidedAnswer($form->get('answer')->get('radio')->getData()->getTitle());
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+
+                if($contest->getType() === Contest::TYPE_RADIO){
+                    $contestParticipant->setProvidedAnswer($form->get('answer')->get('radio')->getData()->getTitle());
+                }
+
+                $this->getDoctrine()->getManager()->persist($contestParticipant);
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('contest_success');
             }
 
-            $this->getDoctrine()->getManager()->persist($contestParticipant);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('contest_success');
+            return $this->render('contest/contest.html.twig', [
+                'contest' => $contest,
+                'form' => $form->createView()
+            ]);
         }
 
-        return $this->render('contest/contest.html.twig', [
+        return $this->render('contest/no-contest.html.twig', [
             'contest' => $contest,
-            'form' => $form->createView()
         ]);
     }
     /**
