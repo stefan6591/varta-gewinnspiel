@@ -40,7 +40,7 @@ class ContestType extends AbstractType
                 $data = $form->getData();
 
                 if (Contest::TYPE_RADIO == $data->getType()) {
-                    return array('Default', 'regular');
+                    return array('Default', 'radio');
                 }
                 return ['Default'];
             },

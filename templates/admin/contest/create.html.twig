@@ -27,6 +27,9 @@
             </div>
         </div>
         <div class="col-6">
+            <div class="form-error">
+                {{ form_errors(form) }}
+            </div>
             {% include 'admin/contest/partials/question-form.html.twig' with { 'form': form.question } %}
         </div>
     </div>

@@ -21,12 +21,12 @@ class QuestionType extends AbstractType
     {
         $builder->add('title', TextType::class);
         $builder->add('answers', CollectionType::class, array(
-                'entry_type' => QuestionAnswerType::class,
-                'entry_options' => array('label' => false),
-                'allow_add' => true,
-                'label' => false,
-            ))
-        ;
+            'entry_type' => QuestionAnswerType::class,
+            'entry_options' => array('label' => false),
+            'allow_add' => true,
+            'label' => false,
+            'error_bubbling' => true,
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
