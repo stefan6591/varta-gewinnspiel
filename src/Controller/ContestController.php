@@ -34,10 +34,8 @@ class ContestController extends AbstractController
         }
 
         $now = new \DateTime();
-        $from = \DateTime::createFromFormat('Y-m-d', $contest->getStartDate());
-        $to = \DateTime::createFromFormat('Y-m-d', $contest->getEndDate());
-        $from->setTime(0,0,0);
-        $to->setTime(23,59,59);
+        $from = \DateTime::createFromFormat('Y-m-d', $contest->getStartDate())->setTime(0,0,0);
+        $to = \DateTime::createFromFormat('Y-m-d', $contest->getEndDate())->setTime(23,59,59);
 
         if($now >= $from && $now <= $to){
 
@@ -61,7 +59,9 @@ class ContestController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($contestParticipant);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('contest_success');
+                return $this->redirectToRoute('contest_success', [
+                    'contest' => $contest->getId()
+                ]);
             }
 
             return $this->render('contest/contest.html.twig', [
@@ -75,9 +75,9 @@ class ContestController extends AbstractController
         ]);
     }
     /**
-     * @Route("/contest/success", name="contest_success")
+     * @Route("/contest/{contest}/success", name="contest_success")
      */
-    public function success()
+    public function success(Request $request, Contest $contest)
     {
         return $this->render('contest/success.html.twig', [
             'controller_name' => 'ContestController',
