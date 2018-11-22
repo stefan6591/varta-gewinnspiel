@@ -1,0 +1,35 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Teilnehmer - {{ contest.title }}{% endblock %}
+{% block page_header %}Teilnehmer - {{ contest.title }}{% endblock %}
+
+{% block page %}
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Stadt</th>
+                        <th scope="col">Postleitzahl</th>
+                        <th scope="col">Abgegebene Antwort</th>
+                        <th scope="col">Teilgenommen am</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for participant in participants %}
+                        <tr>
+                            <td>{{ participant.firstname }} {{ participant.lastname }}</td>
+                            <td>{{ participant.address }}</td>
+                            <td>{{ participant.city }}</td>
+                            <td>{{ participant.zipcode }}</td>
+                            <td>{{ participant.providedAnswer|default('-') }}</td>
+                            <td>{{ participant.createdAt|date('d.m.Y H:i', "Europe/Berlin") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -34,10 +34,8 @@ class ContestController extends AbstractController
         }
 
         $now = new \DateTime();
-        $from = \DateTime::createFromFormat('Y-m-d', $contest->getStartDate());
-        $to = \DateTime::createFromFormat('Y-m-d', $contest->getEndDate());
-        $from->setTime(0,0,0);
-        $to->setTime(23,59,59);
+        $from = \DateTime::createFromFormat('Y-m-d', $contest->getStartDate())->setTime(0,0,0);
+        $to = \DateTime::createFromFormat('Y-m-d', $contest->getEndDate())->setTime(23,59,59);
 
         if($now >= $from && $now <= $to){
 
