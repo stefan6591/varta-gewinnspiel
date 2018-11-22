@@ -13,13 +13,31 @@
                     {% include 'contest/partials/contest-participant-form.html.twig' %}
 
                     {% if contest.type == constant('App\\Entity\\Contest::TYPE_RADIO') %}
-                        {{ form_widget(form.answer.radio, {'attr': {'class': ''}}) }}
-                        <div class="form-error">
-                            {{ form_errors(form.answer.radio) }}
+                        {{ contest.question.title }}
+                        <div class="form-group">
+                            {% for radio in form.answer.radio %}
+                                <div class="form-check">
+                                    {{ form_widget(radio, {'attr': {'class': 'form-check-input'}}) }}
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        {{ radio.vars.label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                            <div class="form-error">
+                                {{ form_errors(form.answer.radio) }}
+                            </div>
                         </div>
                     {% endif %}
 
-                    {{ form_row(form.newsletter, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+                    <div class="form-group">
+                        <div class="form-check">
+                            {{ form_widget(form.newsletter, {'attr': {'class': ''}}) }}
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{ 'Ich möchte den Varta-Guide Newsletter erhalten.' }}
+                            </label>
+                        </div>
+                    </div>
+
                     {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
                 {{ form_end(form) }}
             {% endif %}
