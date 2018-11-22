@@ -10,6 +10,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Adresse</th>
                         <th scope="col">Stadt</th>
                         <th scope="col">Postleitzahl</th>
@@ -21,6 +22,7 @@
                     {% for participant in participants %}
                         <tr>
                             <td>{{ participant.firstname }} {{ participant.lastname }}</td>
+                            <td>{{ participant.Email }}</td>
                             <td>{{ participant.address }}</td>
                             <td>{{ participant.city }}</td>
                             <td>{{ participant.zipcode }}</td>
