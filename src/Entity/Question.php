@@ -29,7 +29,7 @@ class Question
      * @var string
      *
      * @ORM\Column(type="string", length=2048)
-     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"regular"})
+     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"radio"})
      */
     private $title;
 
@@ -50,6 +50,11 @@ class Question
      *
      * @ORM\OneToMany(targetEntity="QuestionAnswer", mappedBy="question", cascade={"persist", "remove"})
      * @Assert\Valid()
+     * @Assert\Count(
+     *      min = 1,
+     *      minMessage = "Sie müssen mindestens eine Antwortmöglichkeit vorgeben.",
+     *     groups={"radio"}
+     * )
      */
     private $answers;
 

@@ -28,7 +28,7 @@ class QuestionAnswer
      * @var string
      *
      * @ORM\Column(type="string", length=2048)
-     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"regular"})
+     * @Assert\NotBlank(message="Dieses Feld darf nicht leer sein.", groups={"radio"})
      */
     private $title;
 
