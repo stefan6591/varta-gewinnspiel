@@ -59,7 +59,9 @@ class ContestController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($contestParticipant);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('contest_success');
+                return $this->redirectToRoute('contest_success', [
+                    'contest' => $contest->getId()
+                ]);
             }
 
             return $this->render('contest/contest.html.twig', [
@@ -73,9 +75,9 @@ class ContestController extends AbstractController
         ]);
     }
     /**
-     * @Route("/contest/success", name="contest_success")
+     * @Route("/contest/{contest}/success", name="contest_success")
      */
-    public function success()
+    public function success(Request $request, Contest $contest)
     {
         return $this->render('contest/success.html.twig', [
             'controller_name' => 'ContestController',
