@@ -4,16 +4,27 @@ namespace App\Controller;
 
 use App\Entity\Contest;
 use App\Entity\ContestParticipant;
+use App\Event\ContestParticipationSuccessEvent;
 use App\Form\Type\ContestParticipantType;
 use phpDocumentor\Reflection\Types\This;
 use App\Form\Type\ContestType;
+use App\Listener\ContestParticipationListener;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContestController extends AbstractController
 {
+    private $dispatcher;
+
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -58,6 +69,13 @@ class ContestController extends AbstractController
 
                 $this->getDoctrine()->getManager()->persist($contestParticipant);
                 $this->getDoctrine()->getManager()->flush();
+
+                if($form->get('newsletter')->getData() === true){
+                    $this->dispatcher->dispatch(
+                        ContestParticipationSuccessEvent::NAME,
+                        new ContestParticipationSuccessEvent($contestParticipant)
+                    );
+                }
 
                 return $this->redirectToRoute('contest_success', [
                     'contest' => $contest->getId()
