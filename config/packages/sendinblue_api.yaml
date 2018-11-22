@@ -1,0 +1,8 @@
+sendinblue_api:
+    clients:
+        first:
+            endpoints:
+                - account
+                - contacts
+                - lists
+            key: "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"
