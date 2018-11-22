@@ -39,10 +39,12 @@
             </div>
         </div>
         <div class="col-6">
-            <div class="form-error">
-                {{ form_errors(form) }}
+            <div id="question-form-container" style="{% if form.type.vars.value != constant('App\\Entity\\Contest::TYPE_RADIO') %}display: none{% endif %}">
+                <div class="form-error">
+                    {{ form_errors(form) }}
+                </div>
+                {% include 'admin/contest/partials/question-form.html.twig' with { 'form': form.question, } %}
             </div>
-            {% include 'admin/contest/partials/question-form.html.twig' with { 'form': form.question } %}
         </div>
     </div>
     {{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
@@ -66,6 +68,11 @@
 
             $('#contest_admin_type_endDate').datepicker({
                 format: 'yyyy-mm-dd'
+            });
+
+            $('#contest_admin_type_type').on('change', function (e) {
+                console.log('foo');
+                $('#question-form-container').toggle();
             });
 
             $collectionHolder = $('ul.answers');
