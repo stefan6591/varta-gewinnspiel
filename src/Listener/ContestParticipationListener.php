@@ -31,7 +31,7 @@ class ContestParticipationListener {
         $attributes = [
             'VORNAME' => $participant->getFirstname(),
             'NAME' => $participant->getLastname(),
-            'DOUBLE_OPT-IN' => 1,
+            'DOUBLE_OPT-IN' => 2,
 //            'ADDRESS' => $participant->getAddress(),
 //            'ZIP_CODE' => $participant->getZipcode(),
 //            'CITY' => $participant->getCity(),
