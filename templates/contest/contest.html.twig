@@ -6,7 +6,7 @@
 {% block body %}
     <div class="row">
         <div class="col-12">
-            <h1>{{ contest.title }}</h1>
+            <h3>{{ contest.title }}</h3>
             {% if contest is not null %}
 
                 {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
@@ -28,6 +28,18 @@
                             </div>
                         </div>
                     {% endif %}
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            {{ form_widget(form.acceptance, {'attr': {'class': ''}}) }}
+                            <label class="form-check-label" for="defaultAcceptance1">
+                                Ich akzeptiere die <a href="https://www.varta-guide.de/datenschutz/" target="_blank">Datenschutzbestimmungen</a>.
+                            </label>
+                            <div class="form-error">
+                                {{ form_errors(form.acceptance) }}
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="form-check">

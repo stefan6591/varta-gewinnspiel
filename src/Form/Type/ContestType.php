@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class ContestType extends AbstractType
 {
@@ -29,6 +30,14 @@ class ContestType extends AbstractType
         }
 
         $builder
+            ->add('acceptance', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Bitte bestätigen Sie die Datenschutzbestimmungen'
+                    ])
+                ]
+            ])
             ->add('newsletter', CheckboxType::class, [
                 'mapped' => false
             ])

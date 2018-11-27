@@ -15,6 +15,7 @@ class ContestParticipationListener {
     /** @var ListsApi  */
     private $listsEndpoint;
 
+    /** @var int  */
     private $sendinBlueListId = 11;
 
     public function __construct(ContactsApi $contactsEndpoint, ListsApi $listsEndpoint)
@@ -31,10 +32,7 @@ class ContestParticipationListener {
         $attributes = [
             'VORNAME' => $participant->getFirstname(),
             'NAME' => $participant->getLastname(),
-            'DOUBLE_OPT-IN' => 2,
-//            'ADDRESS' => $participant->getAddress(),
-//            'ZIP_CODE' => $participant->getZipcode(),
-//            'CITY' => $participant->getCity(),
+            'DOUBLE_OPT-IN' => 2
         ];
 
         $contactModel->setEmail($participant->getEmail());
@@ -42,10 +40,6 @@ class ContestParticipationListener {
         $contactModel->setListIds([$this->sendinBlueListId]);
         $contactModel->setUpdateEnabled(true);
 
-        try {
-            $newContact = $this->contactsEndpoint->createContact($contactModel);
-        } catch (ApiException $e){
-            echo $e->getMessage();die;
-        }
+        $newContact = $this->contactsEndpoint->createContact($contactModel);
     }
 }
