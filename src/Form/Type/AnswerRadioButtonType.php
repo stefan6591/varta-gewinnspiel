@@ -50,6 +50,6 @@ class AnswerRadioButtonType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'contest_participant_type';
+        return 'answer_radio_button_type';
     }
 }
