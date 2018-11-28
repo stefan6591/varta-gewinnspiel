@@ -28,6 +28,13 @@ var js = {
     out: paths.dest + 'js/'
 };
 
+var adminJs = {
+    in: [
+        paths.source + 'js/admin/ContestFormHandler.js',
+    ],
+    out: paths.dest + 'js/admin'
+};
+
 var css = {
     in:[
         paths.vendor + 'bootstrap/dist/css/bootstrap.min.css',
@@ -49,6 +56,12 @@ gulp.task('js', function () {
     return gulp
         .src(js.in)
         .pipe(gulp.dest(js.out));
+});
+
+gulp.task('adminJs', function () {
+    return gulp
+        .src(adminJs.in)
+        .pipe(gulp.dest(adminJs.out));
 });
 
 gulp.task('css', function () {
@@ -81,5 +94,5 @@ gulp.task('watch', ['default'], function () {
 });
 
 gulp.task('default', function() {
-    return runSequence('clean', ['js', 'css', 'fonts']);
+    return runSequence('clean', ['js', 'adminJs', 'css', 'fonts']);
 });

@@ -148,7 +148,7 @@ class Question
     /**
      * @return ArrayCollection
      */
-    public function getAnswers(): ArrayCollection
+    public function getAnswers(): Collection
     {
         return $this->answers;
     }
@@ -156,7 +156,7 @@ class Question
     /**
      * @param ArrayCollection $answers
      */
-    public function setAnswers(ArrayCollection $answers): void
+    public function setAnswers(Collection $answers): void
     {
         $this->answers = $answers;
     }

@@ -29,6 +29,7 @@
                         <td>
                             <a href="{{ path('contest', {'contest': contest.id}) }}" target="_blank" class="btn btn-sm btn-info">Zum Gewinnspiel</a>
                             <a href="{{ path('admin_participant', {'contest': contest.id}) }}" class="btn btn-sm btn-primary">Teilnehmer</a>
+                            <a href="{{ path('admin_contest_edit', {'contest': contest.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
                             {{ form_start(deleteForms[contest.id]) }}
                                 {{ form_widget(deleteForms[contest.id]) }}
                             {{ form_end(deleteForms[contest.id]) }}
