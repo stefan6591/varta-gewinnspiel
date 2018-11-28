@@ -67,6 +67,39 @@ class ContestController extends AbstractController
     }
 
     /**
+     * @Route("/admin/contest/edit/{contest}", name="admin_contest_edit")
+     */
+    public function edit(Request $request, Contest $contest)
+    {
+        $form = $this->createForm(ContestType::class, $contest);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            /** @var Contest $contest */
+            $contest = $form->getData();
+
+            if($contest->getType() === Contest::TYPE_DEFAULT){
+                $contest->setQuestion(null);
+            } elseif ($contest->getType() === Contest::TYPE_RADIO) {
+                /** @var QuestionAnswer $answer */
+                foreach ($contest->getQuestion()->getAnswers() as $answer) {
+                    $answer->setQuestion($contest->getQuestion());
+                }
+            }
+
+            $this->getDoctrine()->getManager()->persist($contest);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_contest');
+        }
+
+        return $this->render('admin/contest/edit.html.twig', [
+            'form' => $form->createView(),
+            'contest' => $contest,
+        ]);
+    }
+
+    /**
      * @Route("/admin/contest/delete/{contest}", name="admin_contest_delete")
      */
     public function deleteAction(Request $request, Contest $contest)

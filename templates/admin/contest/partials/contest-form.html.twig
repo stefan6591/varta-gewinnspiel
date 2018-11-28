@@ -1,0 +1,46 @@
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titel'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.title) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Datum'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.type) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_widget(form.startDate, {'attr': {'class': 'form-control', 'placeholder': 'Von'}}) }}
+                        <div class="form-error">
+                            {{ form_errors(form.startDate) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_widget(form.endDate, {'attr': {'class': 'form-control', 'placeholder': 'Bis'}}) }}
+                        <div class="form-error">
+                            {{ form_errors(form.endDate) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="question-form-container" style="{% if form.type.vars.value != constant('App\\Entity\\Contest::TYPE_RADIO') %}display: none{% endif %}">
+                <div class="form-error">
+                    {{ form_errors(form) }}
+                </div>
+                {% include 'admin/contest/partials/question-form.html.twig' with { 'form': form.question, } %}
+            </div>
+        </div>
+    </div>
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-sm btn-primary'}}) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}
