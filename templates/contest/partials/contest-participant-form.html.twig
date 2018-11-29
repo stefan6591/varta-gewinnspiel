@@ -23,7 +23,7 @@
     <div class="col-12 col-md-6">
         {% set _class = not form.participant.email.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
-            {{ form_widget(form.participant.email, {'attr': {'class': _class, 'placeholder': 'Email'}}) }}
+            {{ form_widget(form.participant.email, {'attr': {'class': _class, 'placeholder': 'E-Mail'}}) }}
             <div class="form-error">
                 {{ form_errors(form.participant.email) }}
             </div>
@@ -32,7 +32,7 @@
     <div class="col-12 col-md-6">
         {% set _class = not form.participant.address.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
-            {{ form_widget(form.participant.address, {'attr': {'class': _class, 'placeholder': 'Adresse'}}) }}
+            {{ form_widget(form.participant.address, {'attr': {'class': _class, 'placeholder': 'Strasse, Hausnr.'}}) }}
             <div class="form-error">
                 {{ form_errors(form.participant.address) }}
             </div>
