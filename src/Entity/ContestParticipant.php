@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *            columns={"email", "contest_id"})
  *    })
  *
- * @UniqueEntity(fields={"email", "contest"}, message="Sie können nur einmal pro Gewinnspiel teilnehmen!")
+ * @UniqueEntity(fields={"email", "contest"}, message="Sie können nur einmal pro Tag teilnehmen!")
  */
 class ContestParticipant
 {
