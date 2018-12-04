@@ -1,6 +1,10 @@
 h3 {
     color: #24387D;
 }
+
+.row input {
+    cursor: pointer;
+}
 .form-error ul {
     list-style-type: none;
     padding: 0;
