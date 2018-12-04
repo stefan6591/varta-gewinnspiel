@@ -62,8 +62,9 @@
     <script>
         $(document).ready(function () {
             if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i))){
-                $('input').on('mouseup', function(){
+                $('input').on('touchend', function(){
                     $(this).trigger("click");
+                    return true;
                 });
             }
         });
