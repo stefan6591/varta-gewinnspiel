@@ -1,13 +1,39 @@
-h3 {
+h1, h2, h3 {
     color: #24387D;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .row input {
     cursor: pointer;
 }
 
+#contest_type_save {
+    margin-top: 20px;
+}
+
 .form-error ul {
     list-style-type: none;
     padding: 0;
     color: #dc3545;
+}
+
+.custom-control-label::before {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.custom-control-label::after {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+@media only screen and (max-width: 991px) {
+    .custom-control {
+        margin-bottom: 15px;
+    }
+
+    #contest_type_save {
+        width: 100%
+    }
 }
