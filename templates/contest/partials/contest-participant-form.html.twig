@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.firstname.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.firstname, {'attr': {'class': _class, 'placeholder': 'Vorname'}}) }}
@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.lastname.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.lastname, {'attr': {'class': _class, 'placeholder': 'Nachname'}}) }}
@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.email.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.email, {'attr': {'class': _class, 'placeholder': 'E-Mail'}}) }}
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.address.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.address, {'attr': {'class': _class, 'placeholder': 'Strasse, Hausnr.'}}) }}
@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.zipcode.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.zipcode, {'attr': {'class': _class, 'placeholder': 'Postleitzahl'}}) }}
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
         {% set _class = not form.participant.city.vars.valid ? class ~ ' is-invalid' : class %}
         <div class="form-group">
             {{ form_widget(form.participant.city, {'attr': {'class': _class, 'placeholder': 'Stadt'}}) }}
