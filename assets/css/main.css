@@ -33,7 +33,7 @@ h1, h2, h3 {
     height: 1.25rem;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1199px) {
     #contest_type_save {
         width: 100%
     }
