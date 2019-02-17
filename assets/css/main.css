@@ -8,6 +8,10 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
+.form-control-lg.custom-checkbox {
+    height: auto;
+}
+
 #contest_type_save {
     margin-top: 20px;
     margin-bottom: 50px;
@@ -30,10 +34,6 @@ h1, h2, h3 {
 }
 
 @media only screen and (max-width: 991px) {
-    .custom-control {
-        margin-bottom: 15px;
-    }
-
     #contest_type_save {
         width: 100%
     }
