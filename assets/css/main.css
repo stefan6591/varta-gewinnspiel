@@ -8,8 +8,12 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
-.form-control-lg.custom-checkbox {
+.custom-checkbox {
     height: auto;
+}
+
+.custom-radio {
+    margin-bottom: 5px;
 }
 
 #contest_type_save {
@@ -23,15 +27,15 @@ h1, h2, h3 {
     color: #dc3545;
 }
 
-.custom-control-label::before {
-    width: 1.25rem;
-    height: 1.25rem;
-}
+/*.custom-control-label::before {*/
+    /*width: 1.25rem;*/
+    /*height: 1.25rem;*/
+/*}*/
 
-.custom-control-label::after {
-    width: 1.25rem;
-    height: 1.25rem;
-}
+/*.custom-control-label::after {*/
+    /*width: 1.25rem;*/
+    /*height: 1.25rem;*/
+/*}*/
 
 @media only screen and (max-width: 1199px) {
     #contest_type_save {
