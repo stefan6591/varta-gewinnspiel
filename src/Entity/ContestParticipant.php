@@ -69,8 +69,8 @@ class ContestParticipant
      * @ORM\Column(type="string", length=5)
      * @Assert\NotBlank(message="Dieser Wert darf nicht leer sein.")
      * @Assert\Length(
-     *     min=5,
-     *     max=5,
+     *     min=4,
+     *     max=10,
      *     minMessage = "Bitte geben Sie mindestens {{ limit }} Zeichen an.",
      *     minMessage = "Bitte geben Sie maximal {{ limit }} Zeichen an.",
      *     exactMessage = "Bitte geben Sie eine korrekte Postleitzahl mit {{ limit }} Zeichen an."
