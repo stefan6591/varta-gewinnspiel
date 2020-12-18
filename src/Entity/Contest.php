@@ -73,7 +73,6 @@ class Contest
     private $question;
 
     /**
-     * @var ArrayCollection()
      *
      * @ORM\OneToMany(targetEntity="ContestParticipant", mappedBy="contest", cascade={"persist", "remove"})
      */
