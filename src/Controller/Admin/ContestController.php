@@ -20,14 +20,22 @@ class ContestController extends AbstractController
     public function index()
     {
         $deleteForms = array();
+        $participants = array();
         $contests = $this->getDoctrine()->getRepository('App:Contest')->findBy([], ['startDate' => 'asc']);
+
 
         foreach ($contests as $contest) {
             $deleteForms[$contest->getId()] = $this->createDeleteForm($contest)->createView();
+            $qb = $this->getDoctrine()->getRepository('App:ContestParticipant')->createQueryBuilder('p')
+                ->where('p.contest = :contest')->setParameter('contest', $contest)
+                ->orderBy('p.createdAt', 'desc')
+            ;
+            $participants[$contest->getId()] = $qb->getQuery()->getResult();
         }
 
         return $this->render('admin/contest/index.html.twig', [
             'contests' => $contests,
+            'participants' => $participants,
             'deleteForms' => $deleteForms,
             'types' => array_flip(Contest::$types)
         ]);

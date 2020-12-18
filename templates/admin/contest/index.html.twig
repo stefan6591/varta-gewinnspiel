@@ -27,7 +27,7 @@
                         <td>{{ contest.startDate|date('d.m.Y') }} - {{ contest.endDate|date('d.m.Y') }}</td>
                         <td>
                             {% if contest.participants|length %}
-                                {{ contest.participants|length }}
+                                {{ participants[contest.id]|length }}
                             {% else %}
                                 0
                             {% endif %}
