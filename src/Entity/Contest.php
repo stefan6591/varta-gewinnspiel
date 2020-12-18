@@ -213,4 +213,12 @@ class Contest
     {
         $this->participants = $participants;
     }
+
+    /**
+     * @return int
+     */
+    public function getParticipantsCount(): int
+    {
+        return $this->participants->count();
+    }
 }
