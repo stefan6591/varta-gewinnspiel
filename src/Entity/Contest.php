@@ -219,6 +219,6 @@ class Contest
      */
     public function getParticipantsCount(): int
     {
-        return $this->participants->count();
+        return 0;
     }
 }
