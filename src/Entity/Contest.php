@@ -213,16 +213,4 @@ class Contest
     {
         $this->participants = $participants;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getParticipantsCount()
-    {
-        try {
-            return $this->participants->count();
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    }
 }
