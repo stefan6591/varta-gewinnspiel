@@ -26,8 +26,8 @@
                         <td>{{ types[contest.type] }}</td>
                         <td>{{ contest.startDate|date('d.m.Y') }} - {{ contest.endDate|date('d.m.Y') }}</td>
                         <td>
-                            {% if  contest.participants %}
-                                {{ contest.participants|length }}
+                            {% if contest.participants is iterable %}
+                                {{ contest.participants | length }}
                             {% else %}
                                 0
                             {% endif %}
