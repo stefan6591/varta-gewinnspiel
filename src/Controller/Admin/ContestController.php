@@ -30,6 +30,7 @@ class ContestController extends AbstractController
                 ->where('p.contest = :contest')->setParameter('contest', $contest)
                 ->orderBy('p.createdAt', 'desc')
             ;
+            $temp = $qb->getQuery()->getResult();
             $participants[$contest->getId()] = [];
         }
 
