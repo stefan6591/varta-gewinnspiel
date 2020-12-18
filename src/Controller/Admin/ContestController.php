@@ -30,7 +30,6 @@ class ContestController extends AbstractController
                 ->createQueryBuilder('p')
                 ->select('count(p.id)')
                 ->where('p.contest = :contest')->setParameter('contest', $contest)
-                ->orderBy('p.createdAt', 'desc')
             ;
             $count = $qb->getQuery()->getSingleScalarResult();
             $participants[$contest->getId()] =  $count;
