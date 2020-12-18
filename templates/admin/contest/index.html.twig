@@ -26,6 +26,13 @@
                         <td>{{ types[contest.type] }}</td>
                         <td>{{ contest.startDate|date('d.m.Y') }} - {{ contest.endDate|date('d.m.Y') }}</td>
                         <td>
+                            {% if  contest.participants %}
+                                {{ contest.participants|length }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </td>
+                        <td>
                             <a href="{{ path('contest', {'contest': contest.id}) }}" target="_blank" class="btn btn-sm btn-info">Zum Gewinnspiel</a>
                             <a href="{{ path('admin_participant', {'contest': contest.id}) }}" class="btn btn-sm btn-primary">Teilnehmer</a>
                             <a href="{{ path('admin_contest_edit', {'contest': contest.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
