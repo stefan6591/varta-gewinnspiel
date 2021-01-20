@@ -70,12 +70,12 @@ class ContestController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($contestParticipant);
                 $this->getDoctrine()->getManager()->flush();
 
-                if($form->get('newsletter')->getData() === true){
+                /*if($form->get('newsletter')->getData() === true){
                     $this->dispatcher->dispatch(
                         ContestParticipationSuccessEvent::NAME,
                         new ContestParticipationSuccessEvent($contestParticipant)
                     );
-                }
+                }*/
 
                 return $this->redirectToRoute('contest_success', [
                     'contest' => $contest->getId()
